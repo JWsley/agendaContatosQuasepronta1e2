@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Agenda</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+
+  <ion-fab vertical="top" horizontal="end" slot="fixed" edge="true">
+    <ion-fab-button routerLink="/detalhes/-1">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-item *ngFor="let arrayContatos of todosContatos" routerLink="/detalhes/{{arrayContatos.id}}">
+    <ion-avatar slot="start">
+      <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+      <!-- <ion-icon name="person-circle-outline"></ion-icon> -->
+    </ion-avatar>
+    <ion-label>{{arrayContatos.nome}}</ion-label>
+  </ion-item>
+
+</ion-content>

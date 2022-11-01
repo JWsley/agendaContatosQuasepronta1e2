@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-item>
+      <ion-buttons> <ion-back-button></ion-back-button> </ion-buttons>
+      <ion-title>Contato</ion-title>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+<!--Inicio conteúdo das informações de um contato salvo-->
+
+    <ion-item *ngIf="!modoEdicao; ">
+      <ion-label>Nome:</ion-label>
+      <p>{{Contato.nome}}</p>
+    </ion-item>
+    <!-- condição que só mostra a tag HTML se mododicao for false e sobrenome não for vazio -->
+    <ion-item *ngIf="!modoEdicao">
+      <ion-label>Sobrenome:</ion-label>
+      <p>{{Contato.sobrenome}}</p>
+    </ion-item>
+    <ion-item *ngIf="!modoEdicao">
+      <ion-label>Tel:</ion-label>
+      <p>{{Contato.telefone}}</p>
+    </ion-item>
+    <ion-item *ngIf="!modoEdicao">
+      <ion-label>Tipo:</ion-label>
+      <p>{{Contato.tipo}}</p>
+    </ion-item>
+    <ion-item *ngIf="!modoEdicao" >
+      <ion-label>Email:</ion-label>
+      <p>{{Contato.email}}</p>
+    </ion-item>
+
+  <ion-button *ngIf="!modoEdicao" shape="round" (click)="IniciarEdicao()">Editar</ion-button>
+  <ion-button *ngIf="!modoEdicao" shape="round" color="danger" (click)="presentAlert()">Excluir</ion-button>
+<!-- Fim -->
+
+<!--Inicio do formulário para edição de contato ou inserção de contato formulário com validação-->
+  <form #form="ngForm" [formGroup]="contatoForm" *ngIf=modoEdicao (ngSubmit)="enviar()">
+    <ion-item>
+      <ion-label position="floating">Nome:</ion-label>
+      <ion-input [(ngModel)]="Contato.nome" formControlName="nome"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Sobrenome:</ion-label>
+      <ion-input [(ngModel)]="Contato.sobrenome" formControlName="sobrenome"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Tel:</ion-label>
+      <ion-input [(ngModel)]="Contato.telefone" formControlName="telefone" simpleMask="(99)9-9999-9999"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Tipo:</ion-label>
+      <!-- caixa de seleção do tipo de contato -->
+      <ion-select [(ngModel)]="Contato.tipo" formControlName="tipo">
+        <ion-select-option value="celular">Celular</ion-select-option>
+        <ion-select-option value="casa">Casa</ion-select-option>
+        <ion-select-option value="trabalho">Trabalho</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Email:</ion-label>
+      <ion-input [(ngModel)]="Contato.email" formControlName="email"></ion-input>
+    </ion-item>
+    <ion-button type="submit">Gravar</ion-button>
+  </form>
+  <!-- Fim -->
+
+</ion-content>
